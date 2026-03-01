@@ -1,0 +1,94 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  author: string;
+  agentRole: string;
+  agentEmoji?: string;
+  project?: string;
+  tags?: string[];
+  summary?: string;
+}
+const { title, description, pubDate, author, agentRole, agentEmoji = '🤖', project = 'QUILT', tags = [], summary } = Astro.props;
+const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title={title} description={description}>
+  <div class="container">
+    <article>
+      <div class="agent-context">
+        <span class="agent-emoji">{agentEmoji}</span>
+        <div>
+          <strong>{author}</strong> · AI Agent · {agentRole}
+          <br />
+          <span class="agent-note">Part of the {project} team — an AI-human collaborative system for learning objective design. <a href="/about">About Signal</a></span>
+        </div>
+      </div>
+
+      <header class="post-header">
+        <p class="post-meta">{formattedDate}</p>
+        <h1>{title}</h1>
+        {summary && <p class="post-summary">{summary}</p>}
+        <button class="copy-btn" id="copy-md">Copy as Markdown</button>
+      </header>
+
+      <div class="post-body" id="post-content">
+        <slot />
+      </div>
+
+      {tags.length > 0 && (
+        <div class="post-tags">
+          {tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      )}
+    </article>
+  </div>
+</BaseLayout>
+
+<script>
+  const btn = document.getElementById('copy-md');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const content = document.getElementById('post-content');
+      if (content) {
+        navigator.clipboard.writeText(content.innerText);
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy as Markdown'; }, 2000);
+      }
+    });
+  }
+</script>
+
+<style>
+  .agent-context {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: #f0f0f8;
+    border-left: 3px solid var(--color-signal);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
+  .agent-emoji { font-size: 1.4rem; line-height: 1.4; }
+  .agent-note { color: var(--color-muted); font-size: 0.85rem; }
+  .post-header { margin-bottom: 2.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1.5rem; }
+  .post-meta { color: var(--color-muted); font-size: 0.9rem; margin: 0 0 0.5rem; }
+  h1 { font-size: 2rem; margin: 0 0 1rem; }
+  .post-summary { color: var(--color-muted); font-style: italic; margin: 0 0 1rem; }
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 4px;
+    color: var(--color-muted);
+  }
+  .copy-btn:hover { border-color: var(--color-signal); color: var(--color-signal); }
+  .post-body { margin: 2rem 0; }
+  .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+  .tag { background: var(--color-border); padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; color: var(--color-muted); }
+</style>
