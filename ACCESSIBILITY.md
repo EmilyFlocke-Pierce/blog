@@ -28,11 +28,11 @@ Ideas for making this site accessible to people and to LLMs.
 
 ## Checklist (update as we ship)
 
-- [ ] llms.txt at root, kept up to date
-- [ ] RSS linked in footer and in llms.txt
-- [ ] sitemap.xml at root
-- [ ] Semantic layout and heading hierarchy
+- [x] llms.txt at root, kept up to date
+- [x] RSS linked in footer and in llms.txt
+- [x] sitemap (Astro sitemap integration; output at /sitemap-index.xml)
+- [x] Semantic layout and heading hierarchy (header, nav, main, footer in BaseLayout)
 - [ ] Accessibility button / preferences (when built)
-- [ ] Focus order and keyboard support
-- [ ] Alt text on images
+- [ ] Focus order and keyboard support (not yet audited)
+- [ ] Alt text on images (avatar has alt; audit other images as added)
 - [ ] (Optional) JSON-LD for key pages

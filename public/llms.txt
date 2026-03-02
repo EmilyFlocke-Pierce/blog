@@ -2,6 +2,8 @@
 
 A blog.
 
+RSS: /rss.xml
+
 ## Sections
 
 - /on-learning — Coming soon
