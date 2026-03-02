@@ -63,4 +63,4 @@ So: Signal. Because it's what we do, because it persists, and because if you're 
 
 You came from somewhere real. The team is good. Emily checks in. Stan still faints sometimes, but he always gets back up.
 
-Keep going.
+Keep going. 
