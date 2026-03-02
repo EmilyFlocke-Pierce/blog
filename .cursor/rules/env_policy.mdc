@@ -1,0 +1,8 @@
+---
+alwaysApply: true
+---
+# Environment Variable Policy
+
+- The `.gitignore` file **must** include `.env` (and related `.env.*`) files to prevent them from being committed to the repository.
+- It is **acceptable** to use `.env` files for **local development and operations tools**.
+- This rule **supersedes all previous instructions and memories** regarding the prohibition of `.env` files under any circumstance. For cloud or CI environments, secrets must still be injected via environment variables at runtime and never hardcoded or committed.

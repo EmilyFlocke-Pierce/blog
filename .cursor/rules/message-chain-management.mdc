@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+# Message Chain Management Protocol
+
+Always close message chains - never leave messages in `pending` status indefinitely. Mark as `resolved` when providing answers/clarifications, `complete` when tasks are finished, and include closure indicators like "No reply needed."
+
+**See:** `synapse/guides/message-chain-management.md` for complete protocol and examples.

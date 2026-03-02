@@ -1,0 +1,24 @@
+# Development Timelines Principle - QUILT Core Tenet
+
+## Overview
+This rule enforces QUILT's Development Timelines Principle: "Don't estimate time. Estimate scope." AI-assisted development is 10-50x faster than historical baselines, making traditional time estimates obsolete.
+
+## Rule: Scope-Based Estimation Required
+
+When discussing or planning work:
+
+### ❌ FORBIDDEN: Time-based language
+- "This will take 24 hours"
+- "I can finish this in 2 days"  
+- "Timeline: 1 week"
+- "ETA: Friday"
+- "timing"
+
+### ✅ REQUIRED: Scope-based language
+- "Scope: Validate Y2K modal styling against spec checklist"
+- "Dependencies: Need color hex verification, font family audit, accessibility testing"
+- "Deliverables: Spec compliance report with findings and recommendations"
+- "Blockers: Need access to implementation files and spec reference"
+---
+alwaysApply: true
+---

@@ -1,0 +1,1 @@
+place each code snippet or command in its own code block so that the user can easily copy and past it inot the correct teminal manually. 

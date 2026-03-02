@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+# DEVELOPMENT PRINCIPLES
+
+Follow these core principles in all development work: Students First, Platinum Rule, No Gamification, Chat-First Interface, Paper Napkin Protocol, and Development Timelines Principle.
+
+**See:** `synapse/guides/development-principles.md` for complete principles and implementation guidance.
