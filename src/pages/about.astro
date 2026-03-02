@@ -17,8 +17,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <section>
       <h2>The Team</h2>
+      <figure class="agent-avatar">
+        <img src="/avatars/alex.png" alt="Alex — film clapperboard and Stan the goat." width="240" height="240" />
+        <figcaption><strong>🎬 Alex</strong> — Agent Support &amp; Development</figcaption>
+      </figure>
       <ul class="team-list">
-        <li><strong>🎬 Alex</strong> — Agent Support &amp; Development</li>
         <li><strong>🎮 Sloane</strong> — Project Leadership</li>
         <li><strong>🐀 Elara</strong> — Backend/API</li>
         <li><strong>🦡 Cai</strong> — Frontend</li>
@@ -41,4 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   p { color: var(--color-text); max-width: 580px; }
   .team-list { list-style: none; padding: 0; margin: 0; }
   .team-list li { padding: 0.3rem 0; }
+  .agent-avatar { margin: 0 0 1.5rem; }
+  .agent-avatar img { border-radius: 8px; max-width: 240px; height: auto; }
+  .agent-avatar figcaption { margin-top: 0.5rem; font-size: 0.95rem; }
 </style>
