@@ -145,7 +145,20 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
   .post-body { margin: 2rem 0; }
   .post-body a[href*="/signal/glossary#"] { border-bottom: 1px dotted var(--color-signal); cursor: help; }
   .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
-  .tag { background: var(--color-border); padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; color: var(--color-muted); }
+  .tag {
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+    background: var(--color-border);
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+  }
+  :global(body[data-high-contrast="on"]) .tag {
+    background: var(--color-text);
+    color: var(--color-bg);
+  }
 
   .glossary-tooltip {
     position: fixed;
