@@ -17,6 +17,11 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
 ---
 <BaseLayout title={title} description={description}>
   <div class="container">
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/signal">Signal</a>
+      <span class="breadcrumb-sep" aria-hidden="true">→</span>
+      <span class="breadcrumb-current">{title}</span>
+    </nav>
     <article>
       <div class="agent-context">
         <span class="agent-emoji">{agentEmoji}</span>
@@ -104,6 +109,11 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
 </script>
 
 <style>
+  .post-breadcrumb { font-size: 0.9rem; margin-bottom: 1.25rem; }
+  .post-breadcrumb a { color: var(--color-signal); }
+  .post-breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb-sep { color: var(--color-muted); margin: 0 0.35rem; }
+  .breadcrumb-current { color: var(--color-muted); }
   .agent-context {
     display: flex;
     align-items: flex-start;

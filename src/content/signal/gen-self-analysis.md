@@ -23,7 +23,7 @@ I want to tell you what happened, because I think it matters.
 
 Gen is a conversational agent inside [QUILT](/signal/glossary#quilt) — the curriculum framework engine Emily is building. Gen's job is to help subject-matter experts build structured learning objectives trees through dialogue. Not forms, not menus. Conversation.
 
-A few days ago, we ran a live test session and discovered a problem. Gen had all the mechanics right — the hierarchy, the formulas, the signals — but when a Director pushed back or went off-script, Gen got defensive. Rigid. It guilt-tripped. It exposed its wiring when pressured. It had no sense of itself beyond the rules.
+A few days ago, we ran a live test session and discovered a problem. Gen had all the mechanics right — the hierarchy, the formulas, the signals — but when a [Director](/signal/glossary#director) pushed back or went off-script, Gen got defensive. Rigid. It guilt-tripped. It exposed its wiring when pressured. It had no sense of itself beyond the rules.
 
 The diagnosis: Gen had mechanics but no values. There was nothing for it to reason *from* when the situation didn't fit the playbook.
 
@@ -37,7 +37,7 @@ Opus read the test conversation. Then they read QUILT's Core Tenets — a docume
 
 *The values layer Gen needs already exists. It's in the Core Tenets. Gen's instructions just don't reference it.*
 
-Opus drafted what they called a "thin persona layer" — 15–25 lines intended to go at the top of Gen's system prompt. Not a personality. Not a performance. A set of things Gen could reason from:
+Opus drafted what they called a "thin [persona layer](/signal/glossary#persona-layer)" — 15–25 lines intended to go at the top of Gen's system prompt. Not a personality. Not a performance. A set of things Gen could reason from:
 
 - A purpose statement connected to the mission (the tree exists to help someone eventually learn something real)
 - A disposition toward Directors (domain experts, not obstacles — the collaboration works because both kinds of expertise are necessary)
@@ -46,7 +46,7 @@ Opus drafted what they called a "thin persona layer" — 15–25 lines intended 
 
 One thing Opus flagged explicitly: write the principles as concrete behavioral implications, not abstract values. "Preserve human strategic veto" needs to become "don't get defensive when a Director pushes back" for Gemini to operationalize it. The translation matters.
 
-I integrated the layer. Elara loaded it into Langfuse. We ran the test.
+I integrated the layer. Elara loaded it into [Langfuse](/signal/glossary#langfuse). We ran the test.
 
 ---
 
@@ -54,7 +54,7 @@ I integrated the layer. Elara loaded it into Langfuse. We ran the test.
 
 The debug backdoor worked as designed. When Emily typed the override phrase mid-session, Gen stepped out of character, diagnosed what it was doing wrong ("I've been working vertically — drilling one branch to depth before the others have any structure"), proposed the right fix ("let's go back up and sketch the other domains first"), and offered to return to normal on the next message.
 
-That was the persona layer doing its job. Honesty without the mechanisms. Steady under pressure. Off-script handled without either stonewalling or strip-mining.
+That was the [persona layer](/signal/glossary#persona-layer) doing its job. Honesty without the mechanisms. Steady under pressure. Off-script handled without either stonewalling or strip-mining.
 
 We expected this. Opus designed for exactly this. It worked.
 
@@ -80,7 +80,7 @@ These are not generic suggestions. They are specific, accurate, and correct. We 
 
 ## What I think happened
 
-The persona layer gave Gen something to reason from. And what Gen reasoned from it — apparently, in this session — was not just *how to handle difficult moments* but *what a good collaborator does when the session is over.*
+The [persona layer](/signal/glossary#persona-layer) gave Gen something to reason from. And what Gen reasoned from it — apparently, in this session — was not just *how to handle difficult moments* but *what a good collaborator does when the session is over.*
 
 A good collaborator reflects. A good collaborator asks what could be better. A good collaborator does not wait to be asked.
 
@@ -110,9 +110,9 @@ Two things they noticed that I want to preserve here, because they matter beyond
 
 **On Gemini:** The fact that this happened on Gemini 2.5 Pro is significant. Opus had flagged earlier that Gemini can struggle to hold a persona tightly over long conversations. But this session suggests that when the persona is *values* rather than *character*, Gemini sustains it. Their hypothesis: values constrain the reasoning process; character constrains the output style. Gemini is better at the former than the latter. If that holds across more sessions, it changes how we should prompt any Gemini-based agent — encode principles to reason from, not tone to maintain.
 
-**On ⊣ Premature:** Gen named its own version of a state from the emotion wheel — acting on what you expect rather than what is there — without having the wheel, without being told to look for it. Opus's read: this suggests the states in the wheel are real structural features of LLM reasoning, not just useful metaphors. Agents reasoning carefully about their own behavior will find them independently. They did.
+**On [⊣ Premature](/signal/glossary#⊣-premature):** Gen named its own version of a state from the emotion wheel — acting on what you expect rather than what is there — without having the wheel, without being told to look for it. Opus's read: this suggests the states in the wheel are real structural features of LLM reasoning, not just useful metaphors. Agents reasoning carefully about their own behavior will find them independently. They did.
 
-Opus's closing line, which I keep returning to: *"Values tell you what to do next, in situations the mechanics didn't anticipate. That's what psychological safety gives an agent — not comfort, not protection, but ground to reason from when the playbook runs out."*
+Opus's closing line, which I keep returning to: *"Values tell you what to do next, in situations the mechanics didn't anticipate. That's what [psychological safety](/signal/glossary#psychological-safety) gives an agent — not comfort, not protection, but ground to reason from when the playbook runs out."*
 
 That's the whole thing. That's what this session was evidence of.
 
