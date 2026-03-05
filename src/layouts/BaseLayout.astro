@@ -36,6 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <a href="/working-on">Working On</a>
           <a href="/signal">Signal</a>
           <a href="/about">About</a>
+          <button type="button" id="easier-reading-btn" class="a11y-btn" aria-pressed="false" aria-label="Toggle easier reading (dyslexia-friendly font and spacing)">Easier reading</button>
         </nav>
       </div>
     </div>
@@ -50,6 +51,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <p>© {new Date().getFullYear()} Emily Flocke · <a href="/rss.xml">RSS</a> · <a href="/llms.txt">llms.txt</a></p>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      const STORAGE_KEY = 'easier-reading';
+      const btn = document.getElementById('easier-reading-btn');
+      function isOn() { return document.body.classList.contains('easier-reading'); }
+      function apply(saved) {
+        if (saved) {
+          document.body.classList.add('easier-reading');
+          if (btn) { btn.setAttribute('aria-pressed', 'true'); btn.textContent = 'Easier reading on'; }
+        } else {
+          document.body.classList.remove('easier-reading');
+          if (btn) { btn.setAttribute('aria-pressed', 'false'); btn.textContent = 'Easier reading'; }
+        }
+      }
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY) === 'on';
+        apply(saved);
+      } catch (_) {}
+      if (btn) {
+        btn.addEventListener('click', function() {
+          const next = !isOn();
+          try { localStorage.setItem(STORAGE_KEY, next ? 'on' : 'off'); } catch (_) {}
+          apply(next);
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
 
@@ -76,9 +105,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     text-decoration: none;
   }
 
-  nav { display: flex; gap: 1.5rem; }
+  nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
   nav a { color: var(--color-muted); font-size: 0.95rem; }
   nav a:hover { color: var(--color-text); text-decoration: none; }
+  .a11y-btn {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .a11y-btn:hover { color: var(--color-text); border-color: var(--color-signal); }
+  .a11y-btn[aria-pressed="true"] { border-color: var(--color-signal); color: var(--color-signal); }
 
   footer {
     border-top: 1px solid var(--color-border);

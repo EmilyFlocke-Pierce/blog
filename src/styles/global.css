@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'OpenDyslexic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/opendyslexic-latin-400-normal.woff2') format('woff2');
+}
+
 :root {
   --color-bg: #faf9f7;
   --color-text: #1a1a1a;
@@ -60,4 +68,16 @@ img { max-width: 100%; height: auto; }
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Easier reading mode (dyslexia-friendly): OpenDyslexic font, more spacing */
+body.easier-reading {
+  font-family: 'OpenDyslexic', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  letter-spacing: 0.03em;
+}
+
+body.easier-reading .container {
+  max-width: 42rem;
 }
