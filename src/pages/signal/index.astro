@@ -71,8 +71,10 @@ const posts = allPosts
       }, 80);
     };
     root.querySelectorAll('a[href*="/signal/glossary#"]').forEach((link) => {
-      const frag = (link.getAttribute('href') || '').split('#')[1];
-      const def = frag ? glossaryTooltips[frag] : null;
+      const href = link.getAttribute('href') || '';
+      const rawFrag = href.split('#')[1];
+      const frag = rawFrag ? decodeURIComponent(rawFrag) : '';
+      const def = frag ? (glossaryTooltips[frag] || glossaryTooltips[rawFrag]) : null;
       if (!def) return;
       link.addEventListener('mouseenter', (e) => show(def, e.currentTarget));
       link.addEventListener('mouseleave', hide);

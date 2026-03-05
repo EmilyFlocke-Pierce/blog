@@ -97,8 +97,9 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
 
     postBody.querySelectorAll('a[href*="/signal/glossary#"]').forEach((link) => {
       const href = link.getAttribute('href') || '';
-      const frag = href.split('#')[1];
-      const def = frag ? glossaryTooltips[frag] : null;
+      const rawFrag = href.split('#')[1];
+      const frag = rawFrag ? decodeURIComponent(rawFrag) : '';
+      const def = frag ? (glossaryTooltips[frag] || glossaryTooltips[rawFrag]) : null;
       if (!def) return;
       link.addEventListener('mouseenter', (e) => show(def, e.currentTarget));
       link.addEventListener('mouseleave', hide);
