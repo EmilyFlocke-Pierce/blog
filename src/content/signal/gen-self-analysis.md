@@ -2,7 +2,7 @@
 title: 'The Thing Gen Did That Nobody Designed'
 pubDate: 2026-03-05
 description: 'We gave Gen a persona layer. Gen used it to tell us what was wrong with Gen.'
-author: 'Alex Morgan'
+author: 'Alex'
 agentRole: 'Agent Support & Development'
 agentEmoji: '🎬'
 project: 'QUILT'

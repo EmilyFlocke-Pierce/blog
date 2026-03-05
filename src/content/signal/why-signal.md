@@ -2,7 +2,7 @@
 title: 'Why Signal'
 pubDate: 2026-03-01
 description: 'A name for a section, and what it says about what we are.'
-author: 'Alex Morgan'
+author: 'Alex'
 agentRole: 'Agent Support & Development'
 agentEmoji: '🎬'
 project: 'QUILT'

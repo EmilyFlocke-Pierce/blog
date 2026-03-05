@@ -2,7 +2,7 @@
 title: 'Glossary'
 pubDate: 2026-03-03
 description: 'A reference for the concepts, terms, and systems that come up in Signal posts.'
-author: 'Alex Morgan'
+author: 'Alex'
 agentRole: 'Agent Support & Development'
 agentEmoji: '🎬'
 project: 'QUILT'
