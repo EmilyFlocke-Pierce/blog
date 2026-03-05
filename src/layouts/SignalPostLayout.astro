@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { glossaryTooltips } from '../data/glossary-tooltips';
 interface Props {
   title: string;
   description: string;
@@ -36,6 +37,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
       <div class="post-body" id="post-content">
         <slot />
       </div>
+      <div id="glossary-tooltip" class="glossary-tooltip" role="tooltip" aria-hidden="true"></div>
 
       {tags.length > 0 && (
         <div class="post-tags">
@@ -46,7 +48,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
   </div>
 </BaseLayout>
 
-<script>
+<script define:vars={{ glossaryTooltips }}>
   const btn = document.getElementById('copy-md');
   if (btn) {
     btn.addEventListener('click', () => {
@@ -56,6 +58,47 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
         btn.textContent = 'Copied!';
         setTimeout(() => { btn.textContent = 'Copy as Markdown'; }, 2000);
       }
+    });
+  }
+
+  const tooltipEl = document.getElementById('glossary-tooltip');
+  const postBody = document.getElementById('post-content');
+  if (tooltipEl && postBody && typeof glossaryTooltips === 'object') {
+    let hideTimer = 0;
+    let showTimer = 0;
+    const delay = 180;
+
+    const show = (text, link) => {
+      clearTimeout(hideTimer);
+      clearTimeout(showTimer);
+      showTimer = window.setTimeout(() => {
+        tooltipEl.textContent = text;
+        tooltipEl.setAttribute('aria-hidden', 'false');
+        const rect = link.getBoundingClientRect();
+        tooltipEl.style.left = `${rect.left + rect.width / 2}px`;
+        tooltipEl.style.top = `${rect.bottom + 8}px`;
+        tooltipEl.style.transform = 'translate(-50%, 0)';
+        tooltipEl.classList.add('is-visible');
+      }, delay);
+    };
+
+    const hide = () => {
+      clearTimeout(showTimer);
+      hideTimer = window.setTimeout(() => {
+        tooltipEl.classList.remove('is-visible');
+        tooltipEl.setAttribute('aria-hidden', 'true');
+      }, 80);
+    };
+
+    postBody.querySelectorAll('a[href*="/signal/glossary#"]').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      const frag = href.split('#')[1];
+      const def = frag ? glossaryTooltips[frag] : null;
+      if (!def) return;
+      link.addEventListener('mouseenter', (e) => show(def, e.currentTarget));
+      link.addEventListener('mouseleave', hide);
+      link.addEventListener('focus', (e) => show(def, e.currentTarget));
+      link.addEventListener('blur', hide);
     });
   }
 </script>
@@ -89,6 +132,25 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
   }
   .copy-btn:hover { border-color: var(--color-signal); color: var(--color-signal); }
   .post-body { margin: 2rem 0; }
+  .post-body a[href*="/signal/glossary#"] { border-bottom: 1px dotted var(--color-signal); cursor: help; }
   .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
   .tag { background: var(--color-border); padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; color: var(--color-muted); }
+
+  .glossary-tooltip {
+    position: fixed;
+    z-index: 1000;
+    max-width: 320px;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #1a1a1a;
+    background: #f5f5f0;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.12s ease;
+  }
+  .glossary-tooltip.is-visible { opacity: 1; }
 </style>
