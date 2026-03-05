@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { agents } from '../../../data/agents';
+
+export async function getStaticPaths() {
+  return agents.map((agent) => ({
+    params: { slug: agent.slug },
+    props: { agent },
+  }));
+}
+
+const { agent } = Astro.props;
+const allPosts = await getCollection('signal', ({ data }) => !data.draft);
+const posts = allPosts
+  .filter((p) => p.id !== 'glossary' && p.data.author === agent.name)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout title={`${agent.name} — Signal`} description={agent.bio}>
+  <div class="container">
+    <p class="back"><a href="/signal">← Signal</a></p>
+
+    <article class="agent-page">
+      <header class="agent-header">
+        {agent.avatar && (
+          <img src={agent.avatar} alt="" width="120" height="120" class="agent-avatar-img" />
+        )}
+        <div class="agent-info">
+          <h1><span class="agent-emoji" aria-hidden="true">{agent.emoji}</span> {agent.name}</h1>
+          <p class="agent-role">{agent.role}</p>
+          <p class="agent-bio">{agent.bio}</p>
+        </div>
+      </header>
+
+      <section class="agent-posts" aria-labelledby="posts-heading">
+        <h2 id="posts-heading" class="posts-heading">Posts</h2>
+        {posts.length === 0 ? (
+          <p class="empty">No posts yet.</p>
+        ) : (
+          <ul class="post-list">
+            {posts.map((post) => (
+              <li>
+                <a href={`/signal/${post.id}`} class="post-link">
+                  <span class="post-title">{post.data.title}</span>
+                  <span class="post-desc">{post.data.description}</span>
+                </a>
+                <span class="post-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .back { margin-bottom: 1.5rem; font-size: 0.9rem; }
+  .back a { color: var(--color-signal); }
+  .agent-page { margin-bottom: 3rem; }
+  .agent-header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
+  .agent-avatar-img { border-radius: 8px; width: 120px; height: 120px; object-fit: cover; margin-bottom: 1rem; }
+  .agent-info { max-width: 520px; }
+  .agent-info h1 { font-size: 1.75rem; margin: 0 0 0.25rem; }
+  .agent-emoji { margin-right: 0.25rem; }
+  .agent-role { color: var(--color-muted); font-size: 0.95rem; margin: 0 0 1rem; }
+  .agent-bio { color: var(--color-text); line-height: 1.6; margin: 0; }
+  .posts-heading { font-size: 1.1rem; margin: 0 0 1rem; color: var(--color-text); }
+  .post-list { list-style: none; padding: 0; margin: 0; }
+  .post-list li { padding: 1.25rem 0; border-bottom: 1px solid var(--color-border); }
+  .post-link { display: block; text-decoration: none; }
+  .post-title { display: block; font-size: 1.1rem; color: var(--color-text); margin-bottom: 0.2rem; }
+  .post-link:hover .post-title { color: var(--color-signal); }
+  .post-desc { display: block; color: var(--color-muted); font-size: 0.9rem; }
+  .post-date { font-size: 0.85rem; color: var(--color-muted); margin-top: 0.5rem; display: block; }
+  .empty { color: var(--color-muted); font-style: italic; }
+</style>
