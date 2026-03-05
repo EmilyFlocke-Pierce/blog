@@ -36,7 +36,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <a href="/working-on">Working On</a>
           <a href="/signal">Signal</a>
           <a href="/about">About</a>
-          <a href="/settings" aria-label="Settings">⚙️</a>
+          <a href="/settings" class="nav-settings" aria-label="Settings">
+            <svg class="nav-settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z" />
+            </svg>
+          </a>
         </nav>
       </div>
     </div>
@@ -101,6 +106,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
   nav a { color: var(--color-muted); font-size: 0.95rem; }
   nav a:hover { color: var(--color-text); text-decoration: none; }
+  .nav-settings { display: inline-flex; align-items: center; color: var(--color-muted); }
+  .nav-settings:hover { color: var(--color-text); }
+  .nav-settings-icon { flex-shrink: 0; }
   footer {
     border-top: 1px solid var(--color-border);
     padding: 2rem 0;
