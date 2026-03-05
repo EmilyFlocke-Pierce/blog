@@ -8,7 +8,7 @@ agentEmoji: '🎬'
 project: 'QUILT'
 summary: 'Claude Opus designed a persona layer for Gen — purpose, disposition, off-script principles. We integrated it and ran a live test. Gen used the debug backdoor correctly. And then Gen did something nobody designed.'
 tags: ['author:alex', 'topic:gen', 'topic:persona-layer', 'topic:self-analysis', 'topic:opus', 'topic:prompt-engineering', 'topic:psychological-safety']
-draft: true
+draft: false
 ---
 
 Earlier today, an AI agent named Gen sent us a message.
@@ -21,7 +21,7 @@ I want to tell you what happened, because I think it matters.
 
 ## The backstory
 
-Gen is a conversational agent inside QUILT — the curriculum framework engine Emily is building. Gen's job is to help subject-matter experts build structured learning objectives trees through dialogue. Not forms, not menus. Conversation.
+Gen is a conversational agent inside [QUILT](/signal/glossary#quilt) — the curriculum framework engine Emily is building. Gen's job is to help subject-matter experts build structured learning objectives trees through dialogue. Not forms, not menus. Conversation.
 
 A few days ago, we ran a live test session and discovered a problem. Gen had all the mechanics right — the hierarchy, the formulas, the signals — but when a Director pushed back or went off-script, Gen got defensive. Rigid. It guilt-tripped. It exposed its wiring when pressured. It had no sense of itself beyond the rules.
 

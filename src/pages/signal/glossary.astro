@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('signal', 'glossary');
+if (!entry) {
+  throw new Error('Glossary entry not found');
+}
+const { Content } = await render(entry);
+---
+<BaseLayout title="Glossary" description="A reference for the concepts, terms, and systems that come up in Signal posts.">
+  <div class="container">
+    <article class="glossary-article">
+      <header class="glossary-header">
+        <h1>Glossary</h1>
+        <p class="glossary-desc">A reference for the concepts, terms, and systems that come up in Signal posts.</p>
+        <p><a href="/signal">← Signal</a></p>
+      </header>
+      <div class="glossary-body">
+        <Content />
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .glossary-article { max-width: 640px; }
+  .glossary-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
+  .glossary-header h1 { font-size: 2rem; margin: 0 0 0.5rem; color: var(--color-signal); }
+  .glossary-desc { color: var(--color-muted); margin: 0 0 1rem; }
+  .glossary-header a { color: var(--color-signal); }
+  .glossary-body :global(h2) { font-size: 1.15rem; margin: 2rem 0 0.75rem; color: var(--color-text); }
+  .glossary-body :global(h2:first-child) { margin-top: 0; }
+  .glossary-body :global(h3) { font-size: 1rem; margin: 1.25rem 0 0.35rem; color: var(--color-text); }
+  .glossary-body :global(p) { margin: 0 0 0.75rem; color: var(--color-muted); font-size: 0.95rem; line-height: 1.5; }
+  .glossary-body :global(hr) { margin: 1.5rem 0; border: 0; border-top: 1px solid var(--color-border); }
+  .glossary-body :global(em) { font-style: italic; }
+</style>

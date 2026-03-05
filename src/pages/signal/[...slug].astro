@@ -4,7 +4,8 @@ import SignalPostLayout from '../../layouts/SignalPostLayout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('signal', ({ data }) => !data.draft);
-  return posts.map(post => ({ params: { slug: post.id }, props: { post } }));
+  const postsWithoutGlossary = posts.filter((p) => p.id !== 'glossary');
+  return postsWithoutGlossary.map(post => ({ params: { slug: post.id }, props: { post } }));
 }
 
 const { post } = Astro.props;
