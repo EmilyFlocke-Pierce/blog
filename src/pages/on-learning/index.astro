@@ -8,7 +8,7 @@ const posts = (await getCollection('on-learning', ({ data }) => !data.draft))
   <div class="container">
     <header class="section-header">
       <h1>On Learning</h1>
-      <p>Education philosophy, learning theory, and what 15 years in a classroom taught me that the research confirmed — and what it didn't.</p>
+      <p>Education philosophy, learning theory, and how people actually learn.</p>
     </header>
     {posts.length === 0 ? (
       <p class="empty">First post coming soon.</p>

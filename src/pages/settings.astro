@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Accessibility settings" description="Customize font, contrast, motion, and focus to make the site easier to use.">
+  <div class="container settings-page">
+    <h1>Accessibility settings</h1>
+    <p class="settings-intro">Adjust how the site looks and behaves. Your choices are saved and apply across the site.</p>
+
+    <section class="settings-card" aria-labelledby="font-size-heading">
+      <h2 id="font-size-heading" class="settings-heading">
+        <span class="settings-icon" aria-hidden="true">≡</span>
+        Font size
+      </h2>
+      <p class="settings-desc">Adjust the base font size to make text easier to read.</p>
+      <div class="settings-options" role="group" aria-label="Font size">
+        <button type="button" class="settings-btn" data-value="small">Small</button>
+        <button type="button" class="settings-btn" data-value="medium">Medium</button>
+        <button type="button" class="settings-btn" data-value="large">Large</button>
+        <button type="button" class="settings-btn" data-value="extra-large">Extra large</button>
+      </div>
+    </section>
+
+    <section class="settings-card" aria-labelledby="font-family-heading">
+      <h2 id="font-family-heading" class="settings-heading">
+        <span class="settings-icon" aria-hidden="true">¶</span>
+        Font family
+      </h2>
+      <p class="settings-desc">Choose a font that's easier for you to read. OpenDyslexic is designed to help people with dyslexia.</p>
+      <div class="settings-options settings-options-grid" role="group" aria-label="Font family">
+        <button type="button" class="settings-btn" data-value="system">System default</button>
+        <button type="button" class="settings-btn" data-value="opendyslexic">OpenDyslexic</button>
+        <button type="button" class="settings-btn" data-value="arial">Arial</button>
+        <button type="button" class="settings-btn" data-value="verdana">Verdana</button>
+      </div>
+    </section>
+
+    <section class="settings-card" aria-labelledby="contrast-heading">
+      <h2 id="contrast-heading" class="settings-heading">
+        <span class="settings-icon" aria-hidden="true">◐</span>
+        High contrast
+      </h2>
+      <p class="settings-desc">Increase contrast between text and backgrounds for better visibility.</p>
+      <label class="settings-checkbox">
+        <input type="checkbox" id="high-contrast" />
+        <span>Enable high contrast mode</span>
+      </label>
+    </section>
+
+    <section class="settings-card" aria-labelledby="motion-heading">
+      <h2 id="motion-heading" class="settings-heading">
+        <span class="settings-icon" aria-hidden="true">▶</span>
+        Reduce motion
+      </h2>
+      <p class="settings-desc">Minimize animations and transitions to reduce motion sensitivity.</p>
+      <label class="settings-checkbox">
+        <input type="checkbox" id="reduce-motion" />
+        <span>Reduce animations and transitions</span>
+      </label>
+    </section>
+
+    <section class="settings-card" aria-labelledby="focus-heading">
+      <h2 id="focus-heading" class="settings-heading">
+        <span class="settings-icon" aria-hidden="true">*</span>
+        Focus indicator
+      </h2>
+      <p class="settings-desc">Customize how focus indicators appear when navigating with keyboard.</p>
+      <div class="settings-options" role="group" aria-label="Focus style">
+        <button type="button" class="settings-btn" data-value="default">Default</button>
+        <button type="button" class="settings-btn" data-value="thick">Thick</button>
+        <button type="button" class="settings-btn" data-value="simplified">Simplified</button>
+      </div>
+    </section>
+
+    <section class="settings-card settings-card-reset">
+      <h2 class="settings-heading-small">Reset settings</h2>
+      <p class="settings-desc">Restore all accessibility settings to their default values.</p>
+      <button type="button" class="settings-reset" id="reset-settings">Reset all</button>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const KEYS = {
+    fontSize: 'a11y-font-size',
+    fontFamily: 'a11y-font-family',
+    highContrast: 'a11y-high-contrast',
+    reduceMotion: 'a11y-reduce-motion',
+    focus: 'a11y-focus',
+  };
+  const DEFAULTS = { fontSize: 'medium', fontFamily: 'system', highContrast: 'off', reduceMotion: 'off', focus: 'default' };
+
+  function get() {
+    try {
+      return {
+        fontSize: localStorage.getItem(KEYS.fontSize) || DEFAULTS.fontSize,
+        fontFamily: localStorage.getItem(KEYS.fontFamily) || DEFAULTS.fontFamily,
+        highContrast: localStorage.getItem(KEYS.highContrast) || DEFAULTS.highContrast,
+        reduceMotion: localStorage.getItem(KEYS.reduceMotion) || DEFAULTS.reduceMotion,
+        focus: localStorage.getItem(KEYS.focus) || DEFAULTS.focus,
+      };
+    } catch (_) { return DEFAULTS; }
+  }
+
+  function apply(s) {
+    document.body.setAttribute('data-font-size', s.fontSize);
+    document.body.setAttribute('data-font-family', s.fontFamily);
+    document.body.setAttribute('data-high-contrast', s.highContrast);
+    document.body.setAttribute('data-reduce-motion', s.reduceMotion);
+    document.body.setAttribute('data-focus', s.focus);
+  }
+
+  function save(s) {
+    try {
+      localStorage.setItem(KEYS.fontSize, s.fontSize);
+      localStorage.setItem(KEYS.fontFamily, s.fontFamily);
+      localStorage.setItem(KEYS.highContrast, s.highContrast);
+      localStorage.setItem(KEYS.reduceMotion, s.reduceMotion);
+      localStorage.setItem(KEYS.focus, s.focus);
+    } catch (_) {}
+  }
+
+  function setActiveButtons() {
+    const s = get();
+    document.querySelectorAll('.settings-options .settings-btn').forEach(btn => {
+      const group = btn.closest('[aria-label]');
+      const key = group?.getAttribute('aria-label') === 'Font size' ? 'fontSize' : group?.getAttribute('aria-label') === 'Font family' ? 'fontFamily' : 'focus';
+      btn.setAttribute('aria-pressed', btn.dataset.value === s[key] ? 'true' : 'false');
+    });
+    const hc = document.getElementById('high-contrast');
+    const rm = document.getElementById('reduce-motion');
+    if (hc) hc.checked = s.highContrast === 'on';
+    if (rm) rm.checked = s.reduceMotion === 'on';
+  }
+
+  apply(get());
+  setActiveButtons();
+
+  document.querySelectorAll('.settings-options .settings-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('[aria-label]');
+      const s = get();
+      if (group?.getAttribute('aria-label') === 'Font size') { s.fontSize = btn.dataset.value; }
+      else if (group?.getAttribute('aria-label') === 'Font family') { s.fontFamily = btn.dataset.value; }
+      else if (group?.getAttribute('aria-label') === 'Focus style') { s.focus = btn.dataset.value; }
+      save(s); apply(s); setActiveButtons();
+    });
+  });
+
+  document.getElementById('high-contrast')?.addEventListener('change', (e) => {
+    const s = get(); s.highContrast = (e.target as HTMLInputElement).checked ? 'on' : 'off'; save(s); apply(s);
+  });
+  document.getElementById('reduce-motion')?.addEventListener('change', (e) => {
+    const s = get(); s.reduceMotion = (e.target as HTMLInputElement).checked ? 'on' : 'off'; save(s); apply(s);
+  });
+
+  document.getElementById('reset-settings')?.addEventListener('click', () => {
+    save(DEFAULTS); apply(DEFAULTS); setActiveButtons();
+  });
+</script>
+
+<style>
+  .settings-page { max-width: 520px; }
+  .settings-intro { color: var(--color-muted); margin: 0 0 2rem; }
+  .settings-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .settings-heading { font-size: 1.1rem; margin: 0 0 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .settings-heading-small { font-size: 1rem; margin: 0 0 0.5rem; }
+  .settings-icon { opacity: 0.7; font-size: 1rem; }
+  .settings-desc { color: var(--color-muted); font-size: 0.9rem; margin: 0 0 1rem; line-height: 1.45; }
+  .settings-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .settings-options-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .settings-btn {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .settings-btn:hover { border-color: var(--color-signal); }
+  .settings-btn[aria-pressed="true"] { border-width: 2px; border-color: var(--color-signal); font-weight: 600; }
+  .settings-checkbox { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem; }
+  .settings-checkbox input { width: 1.1rem; height: 1.1rem; }
+  .settings-card-reset { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+  .settings-card-reset .settings-desc { margin-bottom: 0; }
+  .settings-reset {
+    background: none;
+    border: 1px solid var(--color-border);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--color-muted);
+  }
+  .settings-reset:hover { border-color: var(--color-text); color: var(--color-text); }
+</style>

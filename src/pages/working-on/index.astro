@@ -4,11 +4,11 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('working-on', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<BaseLayout title="Working On" description="What Emily is building: QUILT, AI tools, process, and the work itself.">
+<BaseLayout title="Working On" description="What Emily is building.">
   <div class="container">
     <header class="section-header">
       <h1>Working On</h1>
-      <p>What I'm building, how it's going, and what I'm figuring out along the way.</p>
+      <p>Placeholder.</p>
     </header>
     {posts.length === 0 ? (
       <p class="empty">First post coming soon.</p>

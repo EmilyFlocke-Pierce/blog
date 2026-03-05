@@ -70,14 +70,47 @@ img { max-width: 100%; height: auto; }
   padding: 0 1.5rem;
 }
 
-/* Easier reading mode (dyslexia-friendly): OpenDyslexic font, more spacing */
-body.easier-reading {
+/* Accessibility settings (applied via data attributes from Settings page) */
+
+/* Font size */
+body[data-font-size="small"] { font-size: 0.9rem; }
+body[data-font-size="medium"] { font-size: 1rem; }
+body[data-font-size="large"] { font-size: 1.1rem; }
+body[data-font-size="extra-large"] { font-size: 1.25rem; }
+
+/* Font family */
+body[data-font-family="opendyslexic"] {
   font-family: 'OpenDyslexic', sans-serif;
-  font-size: 1.05rem;
   line-height: 1.85;
   letter-spacing: 0.03em;
 }
+body[data-font-family="opendyslexic"] .container { max-width: 42rem; }
+body[data-font-family="arial"] { font-family: Arial, sans-serif; }
+body[data-font-family="verdana"] { font-family: Verdana, sans-serif; }
 
-body.easier-reading .container {
-  max-width: 42rem;
+/* High contrast */
+body[data-high-contrast="on"] {
+  --color-bg: #fff;
+  --color-text: #000;
+  --color-muted: #333;
+  --color-border: #000;
+}
+
+/* Reduce motion */
+body[data-reduce-motion="on"] *,
+body[data-reduce-motion="on"] *::before,
+body[data-reduce-motion="on"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Focus indicator */
+body[data-focus="thick"] :focus-visible {
+  outline: 3px solid var(--color-signal);
+  outline-offset: 2px;
+}
+body[data-focus="simplified"] :focus-visible {
+  outline: 1px solid var(--color-text);
+  outline-offset: 1px;
 }
