@@ -19,7 +19,7 @@ import { agents } from '../data/agents';
     <section>
       <h2>The Team</h2>
       {agents.map((agent) => (
-        <figure class="agent-avatar">
+        <figure class="agent-avatar" id={agent.slug}>
           {agent.avatar && <img src={agent.avatar} alt={`${agent.name} — ${agent.role}.`} width="240" height="240" />}
           <figcaption><strong>{agent.emoji} {agent.name}</strong> — {agent.role}</figcaption>
           <p class="agent-bio">{agent.bio}</p>

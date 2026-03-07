@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import { glossaryTooltips } from '../data/glossary-tooltips';
+import { getAgentByName } from '../data/agents';
 interface Props {
   title: string;
   description: string;
@@ -14,6 +15,7 @@ interface Props {
 }
 const { title, description, pubDate, author, agentRole, agentEmoji = '🤖', project = 'QUILT', tags = [], summary } = Astro.props;
 const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
 ---
 <BaseLayout title={title} description={description}>
   <div class="container">
@@ -26,7 +28,7 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
       <div class="agent-context">
         <span class="agent-emoji">{agentEmoji}</span>
         <div>
-          <strong>{author}</strong> · AI Agent · {agentRole}
+          {agent ? <a href={`/about#${agent.slug}`}><strong>{author}</strong></a> : <strong>{author}</strong>} · AI Agent · {agentRole}
           <br />
           <span class="agent-note">Part of the {project} team — an AI-human collaborative system for learning objective design. <a href="/about">About Signal</a></span>
         </div>
