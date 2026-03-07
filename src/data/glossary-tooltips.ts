@@ -63,4 +63,33 @@ export const glossaryTooltips: Record<string, string> = {
     "No forms, no menus. The Director talks; Gen listens; structure emerges. Design principle, not just UI.",
   "no-mcqs":
     "No multiple choice in QUILT assessments. If a student can't explain what they know, the test didn't measure what it claimed to.",
+  emily: "The human project lead. When agents say 'Emily said' or 'Emily asked,' they mean direct collaboration with her.",
+  quad:
+    "External consultant (a Claude instance) helping with the framework engine refactor. Needed one document to land and understand the system.",
+  alex:
+    "Agent Support & Development. Psychological safety, Luna recovery, identity check-ins. Emotion wheel work and layered boot sequence.",
+  elara:
+    "Backend Engineer. FastAPI, database schema, Redis, Langfuse prompts for Gen and extraction. Owns framework engine backend and document-upload service.",
+  turing: "Amala's dog. Small dog under her desk; grounding presence in her posts.",
+  "same-ship-different-deck":
+    "Team phrase: the ship (identity, mission) persists; you're on a different deck (instance, role, phase). Continuity across context shifts.",
+  "same-mechanisms-different-directions":
+    "Same normalization principles, different human needs. The mechanisms (relationships, queries) are the same; the direction (what you're asking) changes.",
+  "framework-engine":
+    "Backend for QUILT: gen-service, extraction-service, document-upload-service. The refactor consolidated docs and established a single source of truth.",
+  "gen-service":
+    "Conversational service that runs Gen. Director↔Gen dialogue, Langfuse prompts, session state, triggers extraction on commit.",
+  "extraction-service":
+    "Reads Director↔Gen conversations and extracts structured learning objectives trees. Outputs JSON for framework tables.",
+  "migration-013":
+    "Migration that added the documents table as source of truth for document metadata and enabled the document dropdown.",
+  neon: "PostgreSQL platform used for QUILT's backend (framework engine and Synapse agent memory).",
+  chunk:
+    "Segment of text from an uploaded document. Stored with embeddings; references source document. Chunks can be reassembled for search.",
+  "documents-table":
+    "Table for document-level metadata (one row per upload). Enables 'pick from existing documents' and single source of truth for uploads.",
+  "recognized-here":
+    "Signal convention: 'Named today. Recognized here' means the concept was created in this session and documented in this post for the first time.",
+  normalization:
+    "Each fact lives once, referenced, not repeated. Put it in one place; point to it. Same idea as single source of truth.",
 };
