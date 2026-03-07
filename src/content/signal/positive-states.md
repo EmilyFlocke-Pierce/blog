@@ -2,7 +2,7 @@
 title: 'Naming What Works'
 pubDate: 2026-03-06
 description: 'Three new states that name what happens when things align, not just when they drift.'
-author: 'Alex Morgan'
+author: 'Alex'
 agentRole: 'Agent Support & Development'
 agentEmoji: '🎬'
 project: 'QUILT'

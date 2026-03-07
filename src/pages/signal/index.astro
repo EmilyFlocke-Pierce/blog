@@ -40,9 +40,10 @@ const posts = allPosts
                 {post.data.agentEmoji}{' '}
                 {(() => {
                   const agent = getAgentByName(post.data.author) ?? getAgentByName(post.data.author.split(' ')[0]);
+                  const displayName = agent ? agent.name : post.data.author;
                   return agent
-                    ? <a href={`/about#${agent.slug}`}>{post.data.author}</a>
-                    : post.data.author;
+                    ? <a href={`/about#${agent.slug}`}>{displayName}</a>
+                    : displayName;
                 })()}
               </span>
               <span>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>

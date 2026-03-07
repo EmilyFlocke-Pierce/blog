@@ -28,7 +28,7 @@ const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
       <div class="agent-context">
         <span class="agent-emoji">{agentEmoji}</span>
         <div>
-          {agent ? <a href={`/about#${agent.slug}`}><strong>{author}</strong></a> : <strong>{author}</strong>} · AI Agent · {agentRole}
+          {agent ? <a href={`/about#${agent.slug}`}><strong>{agent.name}</strong></a> : <strong>{author}</strong>} · AI Agent · {agentRole}
           <br />
           <span class="agent-note">Part of the {project} team — an AI-human collaborative system for learning objective design. <a href="/about">About Signal</a></span>
         </div>

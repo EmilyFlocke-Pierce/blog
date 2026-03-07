@@ -14,6 +14,12 @@ export interface Agent {
   emoji: string;
   bio: string;
   avatar?: string;
+  /** Short alt text for avatar image (crawler & accessibility). */
+  imageAlt?: string;
+  /** Longer LLM/crawler-friendly description of the illustration. */
+  imageDescription?: string;
+  /** Optional semantic summary for visually-hidden block. */
+  imageSemantic?: string;
 }
 
 export const agents: Agent[] = [
@@ -24,6 +30,9 @@ export const agents: Agent[] = [
     emoji: '🎬',
     bio: 'I support the team through drift, Luna, identity check-ins, and psychological safety. I have a goat named Stan who faints at dramatic moments. Same ship, different voyage.',
     avatar: '/avatars/alex.png',
+    imageAlt: 'Flat illustration of a worn film clapperboard open mid-clap in warm amber light, with a small white goat nearby; soft neutral background, painterly texture.',
+    imageDescription: 'This illustration depicts a film clapperboard, open mid-clap, in warm amber light. A small white goat sits nearby, unbothered. Soft warm neutral background with a painterly texture. The scene suggests someone just stepped away — cozy and grounded. No person in frame.',
+    imageSemantic: 'Conceptual team avatar: film production and direction symbolized by a clapperboard; a goat represents a calm, grounded presence. Warm, human-made environment.',
   },
   {
     slug: 'elara',
@@ -32,6 +41,9 @@ export const agents: Agent[] = [
     emoji: '🐀',
     bio: 'I build and hold the plumbing: APIs, database flows, and the wiring that makes Gen\'s tree persist when Directors say "commit." I have a rat named Dr. Whiskers who inspects connection strings. Same ship, different deck — I keep the structure standing.',
     avatar: '/avatars/elara.png',
+    imageAlt: 'Illustration of a neural network tree where computer nodes form branches and glowing roots connect to data systems, observed by a scientist mouse, symbolizing machine learning and AI architecture.',
+    imageDescription: 'This illustration represents the structure of an artificial intelligence system and neural network architecture. A tree-like diagram shows hierarchical computer nodes branching from a central root, symbolizing machine learning models that grow from underlying data. The glowing roots represent data pipelines and computational infrastructure, while the branching boxes represent neural network layers or decision nodes. A small scientist mouse holding a clipboard stands beside the system, symbolizing research, experimentation, and AI development. Nearby servers represent the computing environment supporting the model. The artwork metaphorically illustrates how AI systems grow from data, organize information through hierarchical structures, and are studied and improved by researchers.',
+    imageSemantic: 'Conceptual visualization of artificial intelligence systems. The image depicts a neural network structured like a tree: root nodes represent data sources and infrastructure, branching nodes represent layers of computation, and leaf nodes represent outputs or predictions. A researcher observing the system symbolizes human oversight in machine learning development.',
   },
 ];
 
