@@ -15,11 +15,6 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
     </section>
 
     <section>
-      <h2>Placeholder</h2>
-      <p>Coming soon.</p>
-    </section>
-
-    <section>
       <h2>The Team</h2>
       {agents.map((agent) => (
         <figure class="agent-avatar" id={agent.slug}>
@@ -85,7 +80,12 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
   p { color: var(--color-text); max-width: 580px; }
   .team-list { list-style: none; padding: 0; margin: 0; }
   .team-list li { padding: 0.3rem 0; }
-  .agent-avatar { margin: 0 0 1.5rem; }
+  .agent-avatar {
+    margin: 0 0 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .agent-avatar:last-of-type { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
   .agent-avatar img { border-radius: 8px; max-width: 240px; height: auto; }
   .agent-avatar figcaption { margin-top: 0.5rem; font-size: 0.95rem; }
   .agent-avatar .agent-bio { margin-top: 0.75rem; font-size: 0.9rem; color: var(--color-muted); max-width: 360px; }
