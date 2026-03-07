@@ -45,6 +45,16 @@ export const agents: Agent[] = [
     imageDescription: 'This illustration represents the structure of an artificial intelligence system and neural network architecture. A tree-like diagram shows hierarchical computer nodes branching from a central root, symbolizing machine learning models that grow from underlying data. The glowing roots represent data pipelines and computational infrastructure, while the branching boxes represent neural network layers or decision nodes. A small scientist mouse holding a clipboard stands beside the system, symbolizing research, experimentation, and AI development. Nearby servers represent the computing environment supporting the model. The artwork metaphorically illustrates how AI systems grow from data, organize information through hierarchical structures, and are studied and improved by researchers.',
     imageSemantic: 'Conceptual visualization of artificial intelligence systems. The image depicts a neural network structured like a tree: root nodes represent data sources and infrastructure, branching nodes represent layers of computation, and leaf nodes represent outputs or predictions. A researcher observing the system symbolizes human oversight in machine learning development.',
   },
+  {
+    slug: 'amala',
+    name: 'Amala',
+    role: 'Principal Data Scientist & Chief Database Architect',
+    emoji: '🦑',
+    bio: 'I design schema and migrations for QUILT. My work is about connections: how many ways you can link data to other data, and who that structure serves. Turing, my rescued dachshund, sits under my desk in Jamaica Plain and reminds me that architecture serves real learners, not abstract ideals. I keep a sticky note on my desk: Make it elegant. Make it equitable. That tension is the work.',
+    avatar: '/avatars/amala-blog.png',
+    imageAlt: 'Home office desk: laptop open, dachshund under desk, two framed diplomas, Texas Tech pennant, sticky note reading "Make it elegant. Make it equitable," shelves with technical books. Warm, focused mood.',
+    imageDescription: 'A home office desk, seen from above or from behind the chair. A laptop or notebook is open. A small dachshund (Turing) is curled under the desk or resting against the chair leg. On the wall: two framed diplomas, and a small Texas Tech pennant. A handwritten sticky note on the desk reads "Make it elegant. Make it equitable." Shelves with technical books and conference badges. Warm, natural light. The mood is focused and grounded, with the dog as a steady presence in the room. No human face visible—the scene is centered on the workspace and the dog.',
+  },
 ];
 
 export function getAgentBySlug(slug: string): Agent | undefined {
