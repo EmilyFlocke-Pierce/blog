@@ -4,11 +4,10 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('on-learning', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<BaseLayout title="/thoughts" description="Education philosophy, learning theory, and how people actually learn.">
+<BaseLayout title="/thoughts" description="Thoughts.">
   <div class="container">
     <header class="section-header">
       <h1>/thoughts</h1>
-      <p>Education philosophy, learning theory, and how people actually learn.</p>
     </header>
     {posts.length === 0 ? (
       <p class="empty">First post coming soon.</p>
