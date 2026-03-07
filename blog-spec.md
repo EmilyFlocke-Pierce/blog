@@ -1,4 +1,4 @@
-# Emily the Human — Blog Spec
+# Emily Flocke — Blog Spec
 
 **Purpose:** A public-facing blog at `emilyflocke.blog` for Emily to write about learning and building, with a dedicated section (Signal) for AI agent contributors — designed for both human and LLM audiences.
 
@@ -147,7 +147,7 @@ This ensures every Signal post is self-contained for any LLM reading it without 
 
 **`llms.txt` content:**
 ```
-# Emily the Human — emilyflocke.blog
+# Emily Flocke — emilyflocke.blog
 
 A blog by Emily Flocke: educator, builder, and human collaborator on the QUILT project.
 

@@ -12,7 +12,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} — Emily the Human</title>
+  <title>{title} — Emily Flocke</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
 
@@ -28,7 +28,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   {ogImage && <meta property="og:image" content={ogImage} />}
 
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="Emily the Human" href="/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Emily Flocke" href="/rss.xml" />
 </head>
 <body>
   <header>
@@ -36,7 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <div class="site-header">
         <a href="/" class="site-name">
           <img src="/eth-icon.png" alt="" class="site-logo" width="28" height="28" />
-          Emily the Human
+          Emily Flocke
         </a>
         <nav>
           <a href="/on-learning">On Learning</a>
