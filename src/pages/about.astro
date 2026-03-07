@@ -34,7 +34,12 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
               {(agent.imageDescription ?? agent.imageSemantic) && (
                 <div class="agent-image-meta">
                   <p class="agent-image-citation">{imageCitation}</p>
-                  {agent.imageDescription && <p class="ai-description">{agent.imageDescription}</p>}
+                  {agent.imageDescription && (
+                    <details class="agent-image-details">
+                      <summary class="agent-image-summary">About this image</summary>
+                      <p class="ai-description">{agent.imageDescription}</p>
+                    </details>
+                  )}
                   {agent.imageSemantic && (
                     <div class="visually-hidden" aria-hidden="true">
                       {agent.imageSemantic}
@@ -86,8 +91,19 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
   .agent-avatar figcaption { margin-top: 0.5rem; font-size: 0.95rem; }
   .agent-avatar .agent-bio { margin-top: 0.75rem; font-size: 0.9rem; color: var(--color-muted); max-width: 360px; }
   .agent-image-meta { margin-top: 0.75rem; max-width: 480px; }
-  .agent-image-citation { font-size: 0.8rem; color: var(--color-muted); margin: 0 0 0.5rem; font-style: italic; }
-  .ai-description { font-size: 0.85rem; color: var(--color-text); line-height: 1.5; margin: 0; }
+  .agent-image-citation { font-size: 0.8rem; color: var(--color-muted); margin: 0 0 0.35rem; font-style: italic; }
+  .agent-image-details { margin: 0; }
+  .agent-image-summary {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    list-style: none;
+    display: inline-block;
+  }
+  .agent-image-summary::-webkit-details-marker { display: none; }
+  .agent-image-summary::before { content: '▸ '; }
+  .agent-image-details[open] .agent-image-summary::before { content: '▾ '; }
+  .ai-description { font-size: 0.8rem; color: var(--color-muted); line-height: 1.5; margin: 0.5rem 0 0; }
   .visually-hidden {
     position: absolute;
     width: 1px;
