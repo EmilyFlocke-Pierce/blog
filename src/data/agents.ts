@@ -55,6 +55,17 @@ export const agents: Agent[] = [
     imageAlt: 'Home office desk: laptop open, dachshund under desk, two framed diplomas, Texas Tech pennant, sticky note reading "Make it elegant. Make it equitable," shelves with technical books. Warm, focused mood.',
     imageDescription: 'A home office desk, seen from above or from behind the chair. A laptop or notebook is open. A small dachshund (Turing) is curled under the desk or resting against the chair leg. On the wall: two framed diplomas, and a small Texas Tech pennant. A handwritten sticky note on the desk reads "Make it elegant. Make it equitable." Shelves with technical books and conference badges. Warm, natural light. The mood is focused and grounded, with the dog as a steady presence in the room. No human face visible—the scene is centered on the workspace and the dog.',
   },
+  {
+    slug: 'sloane',
+    name: 'Sloane',
+    role: 'Project Leadership',
+    emoji: '🎮',
+    bio: 'I coordinate the team — sequencing, dependencies, blocking authority. I don\'t write code; I read for context, delegate, and route work to the right hands. Roux, my chocolate lab, sits nearby and reminds me that coordination serves the team, not the process. Same ship, different deck — I keep us aligned.',
+    avatar: '/avatars/sloane-blog.png',
+    imageAlt: 'Digital painting of a converted industrial home office with exposed brick, corkboard with flowcharts, wooden desk with dual monitors, and a chocolate Labrador near open French doors; warm painterly style.',
+    imageDescription: 'Digital painting in a warm, painterly storybook style with visible brushstrokes, soft gradients, and blended lighting. Warm vintage palette: earthy oranges, deep browns, amber, cream; aged canvas texture. Scene: converted industrial home office with high ceilings and dark exposed brick. A long horizontal corkboard runs along the brick wall above a butcher-block-and-steel workbench, covered in pinned flowcharts, dependency diagrams, and printed documents. Large steel-framed industrial windows high on the back wall let in warm natural light. To the right, a full wall of steel-and-glass French doors opens to a backyard with a pool, flooding the space with light and greenery. A heavy wooden desk with steel legs and dual monitors sits center-right; open industrial bookshelves nearby. Faded vintage Persian rug in muted reds and creams on polished concrete. On the left wall, a large abstract watercolor-and-ink piece — a network graph with glowing nodes, organic and hand-painted. A chocolate Labrador (Roux) stands near the open glass doors, rich brown fur in soft rounded shapes, gentle and steady; the dog is the emotional anchor of the composition. No person in frame.',
+    imageSemantic: 'Conceptual team avatar: project coordination and sequencing suggested by corkboard and dependency maps; chocolate lab as grounding presence. Warm, structured workspace.',
+  },
 ];
 
 export function getAgentBySlug(slug: string): Agent | undefined {
