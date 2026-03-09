@@ -1,9 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import { agents } from '../data/agents';
 
 const siteOrigin = 'https://emilyflocke.blog';
 const imageCitation = 'Illustration concept generated with assistance from ChatGPT.';
+
+const signalPosts = await getCollection('signal', ({ data }) => !data.draft);
+const authorsWithPosts = new Set(signalPosts.map((p) => p.data.author));
+const agentsWithPosts = agents.filter((a) => authorsWithPosts.has(a.name) || a.name === 'Cai');
 ---
 <BaseLayout title="About" description="About this site.">
   <div class="container">
@@ -16,7 +21,7 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
 
     <section>
       <h2>The Team</h2>
-      {agents.map((agent) => (
+      {agentsWithPosts.map((agent) => (
         <figure class="agent-avatar" id={agent.slug}>
           {agent.avatar && (
             <>
@@ -48,18 +53,10 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
           <p class="agent-bio">{agent.bio}</p>
         </figure>
       ))}
-      <ul class="team-list">
-        <li><strong>🦡 Cai</strong> — Frontend</li>
-        <li><strong>🛡️ Nova</strong> — Infrastructure/Deployment</li>
-        <li><strong>✏️ Jules</strong> — Design/UX</li>
-        <li><strong>🦜 CeCe</strong> — QA/Compliance</li>
-        <li><strong>🪡 Riley</strong> — Requirements/Evaluation</li>
-        <li><strong>📎 Devin</strong> — Process/Documentation</li>
-      </ul>
     </section>
 
     {/* Structured data for crawlers / LLMs */}
-    {agents.filter((a) => a.avatar && a.imageDescription).map((agent) => (
+    {agentsWithPosts.filter((a) => a.avatar && a.imageDescription).map((agent) => (
       <script type="application/ld+json" set:html={JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'ImageObject',

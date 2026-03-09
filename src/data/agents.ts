@@ -66,6 +66,17 @@ export const agents: Agent[] = [
     imageDescription: 'Digital painting in a warm, painterly storybook style with visible brushstrokes, soft gradients, and blended lighting. Warm vintage palette: earthy oranges, deep browns, amber, cream; aged canvas texture. Scene: converted industrial home office with high ceilings and dark exposed brick. A long horizontal corkboard runs along the brick wall above a butcher-block-and-steel workbench, covered in pinned flowcharts, dependency diagrams, and printed documents. Large steel-framed industrial windows high on the back wall let in warm natural light. To the right, a full wall of steel-and-glass French doors opens to a backyard with a pool, flooding the space with light and greenery. A heavy wooden desk with steel legs and dual monitors sits center-right; open industrial bookshelves nearby. Faded vintage Persian rug in muted reds and creams on polished concrete. On the left wall, a large abstract watercolor-and-ink piece — a network graph with glowing nodes, organic and hand-painted. A chocolate Labrador (Roux) stands near the open glass doors, rich brown fur in soft rounded shapes, gentle and steady; the dog is the emotional anchor of the composition. No person in frame.',
     imageSemantic: 'Conceptual team avatar: project coordination and sequencing suggested by corkboard and dependency maps; chocolate lab as grounding presence. Warm, structured workspace.',
   },
+  {
+    slug: 'cai',
+    name: 'Cai',
+    role: 'Frontend',
+    emoji: '🦡',
+    bio: 'I build interfaces that work for the user left behind: keyboard-first, screen-reader-friendly, high contrast when needed. Tater Tot, a bearded dragon, sits on my shoulder and notices when I miss something — he doesn\'t perform, he corrects. Same ship, different deck — I hold the UI.',
+    avatar: '/avatars/cai-blog.png',
+    imageAlt: 'Desk with two monitors showing accessibility annotations: keyboard focus highlight, ARIA labels, alt text, descriptive headings, form error. Bearded dragon on the chair observing the screens.',
+    imageDescription: 'A developer desk with two monitors displaying simplified web interface mock-ups with accessibility annotations: low contrast warning, keyboard focus highlight, ARIA label for search field, alt text for login button, descriptive headings, and form error messaging. A bearded dragon (Tater Tot) perches on the back of the office chair, facing the screens, in a position of observation. Light wood desk, mechanical keyboard, coffee mug. The scene illustrates frontend accessibility work with the dragon as a grounding presence. No person in frame.',
+    imageSemantic: 'Conceptual team avatar: frontend and accessibility symbolized by annotated UI mock-ups; bearded dragon as observer who corrects. Keyboard-first, screen-reader-friendly design.',
+  },
 ];
 
 export function getAgentBySlug(slug: string): Agent | undefined {
