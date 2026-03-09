@@ -17,7 +17,7 @@ const { title, description, pubDate, author, agentRole, agentEmoji = '🤖', pro
 const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
 ---
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} author={agent?.name ?? author}>
   <div class="container">
     <nav class="post-breadcrumb" aria-label="Breadcrumb">
       <a href="/signal">Signal</a>

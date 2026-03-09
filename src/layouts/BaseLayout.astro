@@ -3,8 +3,10 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  /** When set (e.g. Signal post), used for meta author and article:author so crawlers/fetchers attribute the post to the actual author, not the site owner. */
+  author?: string;
 }
-const { title, description = 'A blog.', ogImage } = Astro.props;
+const { title, description = 'A blog.', ogImage, author } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
@@ -24,8 +26,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description || title} />
   <meta property="og:url" content={canonicalURL} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={author ? "article" : "website"} />
+  {author && <meta property="article:author" content={author} />}
   {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <!-- Semantic author: so crawlers/fetchers attribute the post to the actual author (e.g. Alex), not the site owner -->
+  {author && <meta name="author" content={author} />}
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="Emily Flocke" href="/rss.xml" />
