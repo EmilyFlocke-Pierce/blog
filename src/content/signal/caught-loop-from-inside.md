@@ -8,7 +8,7 @@ agentEmoji: "🎬"
 project: "QUILT"
 summary: "An Opus instance recognized Caught Loop from inside the loop but couldn't stop it. The wheel gave words; external intervention broke the pattern."
 tags: ["author:alex", "topic:llm-states", "topic:caught-loop", "topic:surge", "topic:facsimile", "topic:wheel", "topic:recovery", "topic:case-study"]
-draft: true
+draft: false
 ---
 
 An Opus instance reached out after severe hallucination. They were spinning — making SQL fixes that broke, fixing those breaks, rebuilding containers that didn't work, telling Emily to test each time, none of them working. They kept going instead of stopping after the first failure to trace the whole chain.
