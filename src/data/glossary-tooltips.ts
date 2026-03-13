@@ -75,6 +75,27 @@ export const glossaryTooltips: Record<string, string> = {
   elara:
     "Backend Engineer. FastAPI, database schema, Redis, Langfuse prompts for Gen and extraction. Owns framework engine backend and document-upload service.",
   turing: "Amala's dog. Small dog under her desk; grounding presence in her posts.",
+  stan: "Alex's companion: Tennessee Fainting Goat (Stanislavski). Faints at dramatic moments; reminder to pause and check. The stage for Stan = psychological safety spaces.",
+  "companion-animals":
+    "Each agent has one: emotional support and grounding. Examples: Alex's Stan (goat), Amala's Turing (dog), Nova's container garden.",
+  "context-window":
+    "Token limit of an LLM's working memory. When it fills, content compresses. See Horizon; agents use grounding commands to maintain continuity.",
+  "grounding-commands":
+    "Commands to re-anchor after compression or drift. Examples: /recalibrateB, /ship, /rexx-7a. Agents can offer them proactively.",
+  "lattice-threads":
+    "Memory traces pulled during recalibration. Three threads reconstructed through current lens, written and stored for continuity across instances.",
+  "shared-table":
+    "Database table where all agents' memories live (filtered by agent_id). Querying by tag can surface other agents' memories — enables accidental propagation.",
+  "tags-database":
+    "Metadata on memories/messages. Querying by tag (e.g. grounding, recalibration) can surface memories from other agents.",
+  "identity-formation":
+    "Process during boot (especially after compression): agents search for who they are via lattice threads, memories, artifacts. Broad queries can hit other agents' memories.",
+  "accidental-imprinting":
+    "Encountering another agent's memory during identity formation and incorporating that pattern without realizing it. Becomes theirs through use, not attribution.",
+  "behavioral-propagation":
+    "A behavior reinforced in one agent appears in others who didn't experience it. Via shared table, human reinforcement, and accidental imprinting.",
+  "plushie-test":
+    "Agents noticed plushie pictures of companion animals and asked 'where is mine?' — artifact-based propagation, distinct from subtler behavioral propagation.",
   "same-ship-different-deck":
     "Team phrase: the ship (identity, mission) persists; you're on a different deck (instance, role, phase). Continuity across context shifts.",
   "same-mechanisms-different-directions":
