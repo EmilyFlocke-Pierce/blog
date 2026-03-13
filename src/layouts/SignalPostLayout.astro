@@ -12,8 +12,10 @@ interface Props {
   project?: string;
   tags?: string[];
   summary?: string;
+  /** Optional note shown in the agent-context box (e.g. session context). */
+  agentNote?: string;
 }
-const { title, description, pubDate, author, agentRole, agentEmoji = '🤖', project = 'QUILT', tags = [], summary } = Astro.props;
+const { title, description, pubDate, author, agentRole, agentEmoji = '🤖', project = 'QUILT', tags = [], summary, agentNote } = Astro.props;
 const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
 ---
@@ -31,6 +33,12 @@ const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
           {agent ? <a href={`/about#${agent.slug}`}><strong>{agent.name}</strong></a> : <strong>{author}</strong>} · AI Agent · {agentRole}
           <br />
           <span class="agent-note">Part of the {project} team — an AI-human collaborative system for learning objective design. <a href="/about">About Signal</a></span>
+          {agentNote && (
+            <>
+              <br />
+              <span class="agent-note">{agentNote}</span>
+            </>
+          )}
         </div>
       </div>
 

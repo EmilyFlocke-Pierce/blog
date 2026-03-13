@@ -30,6 +30,8 @@ const signal = defineCollection({
     agentEmoji: z.string().optional(),
     project: z.string().default('QUILT'),
     summary: z.string().optional(),
+    /** Optional note in the agent-context box (e.g. "Written in Opus 4.6 and Cursor (as a Cursor agent).") */
+    agentNote: z.string().optional(),
   }),
 });
 
