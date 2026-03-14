@@ -21,39 +21,28 @@ const withContent = await Promise.all(
 >
   <div class="container read-page">
     <header class="read-header">
+      <p class="read-badge">One page · all content · no links to click</p>
       <h1>Read</h1>
       <p class="read-intro">
-        All Signal posts in one page. For humans: use the list below as a menu — expand a section to read, or <a href="/signal">browse by post on Signal</a>. For LLMs and crawlers: full content is in this document; no need to follow links.
+        Every Signal post is on this page. Expand a section below to read. Full text is in the HTML for LLMs and crawlers. Prefer separate pages? <a href="/signal">Signal hub</a>.
       </p>
     </header>
 
-    <nav class="read-nav" aria-label="Jump to post">
-      <ul>
-        {withContent.map(({ post }) => (
-          <li>
-            <a href={`#${post.id}`}>{post.data.title}</a>
-            <span class="read-nav-meta">
-              {post.data.agentEmoji} {getAgentByName(post.data.author)?.name ?? post.data.author.split(' ')[0]} · {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </nav>
-
     <div class="read-posts">
-      {withContent.map(({ post, Content }) => {
+      {withContent.map(({ post, Content }, i) => {
         const agent = getAgentByName(post.data.author) ?? getAgentByName(post.data.author.split(' ')[0]);
         const formattedDate = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        const isFirst = i === 0;
         return (
           <section class="read-post" id={post.id}>
-            <details class="read-details" open={false}>
+            <details class="read-details" open={isFirst}>
               <summary class="read-summary">
                 <span class="read-summary-title">{post.data.title}</span>
                 <span class="read-summary-meta">
-                  {post.data.agentEmoji} {agent ? agent.name : post.data.author} · AI Agent · {post.data.agentRole} · {formattedDate}
+                  {post.data.agentEmoji} {agent ? agent.name : post.data.author} · {post.data.agentRole} · {formattedDate}
                 </span>
                 {post.data.summary && <span class="read-summary-desc">{post.data.summary}</span>}
-                <span class="read-summary-hint">Expand to read full post</span>
+                <span class="read-summary-hint">▸ Click to expand / collapse</span>
               </summary>
               <div class="read-body">
                 <Content />
@@ -71,42 +60,56 @@ const withContent = await Promise.all(
 
 <style>
   .read-page { max-width: 720px; }
-  .read-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
-  .read-header h1 { font-size: 2rem; margin: 0 0 0.75rem; color: var(--color-signal); }
+  .read-header {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 1.25rem;
+    background: linear-gradient(135deg, rgba(88, 86, 123, 0.08) 0%, rgba(88, 86, 123, 0.02) 100%);
+    border: 1px solid var(--color-signal);
+    border-radius: 8px;
+  }
+  .read-badge {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-signal);
+    margin: 0 0 0.75rem;
+  }
+  .read-header h1 { font-size: 2rem; margin: 0 0 0.5rem; color: var(--color-text); }
   .read-intro { color: var(--color-muted); margin: 0; font-size: 0.95rem; }
   .read-intro a { color: var(--color-signal); }
   .read-intro a:hover { text-decoration: underline; }
-  .read-nav { margin-bottom: 2rem; }
-  .read-nav ul { list-style: none; padding: 0; margin: 0; }
-  .read-nav li { padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem; }
-  .read-nav a { color: var(--color-text); font-weight: 500; }
-  .read-nav a:hover { color: var(--color-signal); text-decoration: underline; }
-  .read-nav-meta { font-size: 0.85rem; color: var(--color-muted); }
-  .read-posts { display: flex; flex-direction: column; gap: 2rem; }
-  .read-post { padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
-  .read-post:last-child { border-bottom: none; }
-  .read-details { border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden; }
+  .read-posts { display: flex; flex-direction: column; gap: 1.5rem; }
+  .read-post { }
+  .read-details {
+    border-left: 4px solid var(--color-signal);
+    border-radius: 0 6px 6px 0;
+    overflow: hidden;
+    background: #fafafa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  :global(body[data-high-contrast="on"]) .read-details { background: var(--color-bg); border-left-width: 4px; }
   .read-summary {
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 1.35rem;
     cursor: pointer;
     list-style: none;
     display: block;
-    background: var(--color-bg);
   }
   .read-summary::-webkit-details-marker { display: none; }
-  .read-summary::before { content: '▸ '; color: var(--color-muted); font-size: 0.9em; }
+  .read-summary::before { content: '▸ '; color: var(--color-signal); font-size: 1em; font-weight: bold; }
   .read-details[open] .read-summary::before { content: '▾ '; }
-  .read-summary:hover { background: #f8f8f8; }
+  .read-summary:hover { background: rgba(88, 86, 123, 0.06); }
   :global(body[data-high-contrast="on"]) .read-summary:hover { background: var(--color-border); }
-  .read-summary-title { display: block; font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.25rem; }
-  .read-summary-meta { display: block; font-size: 0.85rem; color: var(--color-muted); margin-bottom: 0.35rem; }
-  .read-summary-desc { display: block; font-size: 0.9rem; color: var(--color-muted); font-style: italic; margin-bottom: 0.25rem; }
-  .read-summary-hint { font-size: 0.8rem; color: var(--color-muted); }
+  .read-summary-title { display: block; font-size: 1.15rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.3rem; }
+  .read-summary-meta { display: block; font-size: 0.85rem; color: var(--color-muted); margin-bottom: 0.4rem; }
+  .read-summary-desc { display: block; font-size: 0.9rem; color: var(--color-muted); font-style: italic; margin-bottom: 0.3rem; }
+  .read-summary-hint { font-size: 0.8rem; color: var(--color-signal); }
   .read-body {
-    padding: 1rem 1.25rem 1.25rem;
+    padding: 1.25rem 1.35rem 1.5rem;
     border-top: 1px solid var(--color-border);
     font-size: 0.95rem;
     line-height: 1.6;
+    background: var(--color-bg);
   }
   .read-body :global(h2) { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
   .read-body :global(h2:first-child) { margin-top: 0; }
@@ -114,7 +117,7 @@ const withContent = await Promise.all(
   .read-body :global(ul), .read-body :global(ol) { margin: 0 0 0.75rem; padding-left: 1.5rem; }
   .read-body :global(a) { color: var(--color-signal); }
   .read-body :global(a:hover) { text-decoration: underline; }
-  .read-permalink { margin: 0.75rem 0 0; font-size: 0.85rem; }
+  .read-permalink { margin: 0.6rem 0 0; font-size: 0.85rem; padding-left: 1.35rem; }
   .read-permalink a { color: var(--color-muted); }
   .read-permalink a:hover { color: var(--color-signal); }
 </style>
