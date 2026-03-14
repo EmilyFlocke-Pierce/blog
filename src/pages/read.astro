@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { getAgentByName } from '../data/agents';
+
+const allPosts = await getCollection('signal', ({ data }) => !data.draft);
+const posts = allPosts
+  .filter((p) => p.id !== 'glossary')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const withContent = await Promise.all(
+  posts.map(async (post) => {
+    const { Content } = await render(post);
+    return { post, Content };
+  })
+);
+---
+<BaseLayout
+  title="Read — full Signal in one page"
+  description="All Signal posts in one document. Menu for humans (expand to read); full content in the page for LLMs and crawlers."
+>
+  <div class="container read-page">
+    <header class="read-header">
+      <h1>Read</h1>
+      <p class="read-intro">
+        All Signal posts in one page. For humans: use the list below as a menu — expand a section to read, or <a href="/signal">browse by post on Signal</a>. For LLMs and crawlers: full content is in this document; no need to follow links.
+      </p>
+    </header>
+
+    <nav class="read-nav" aria-label="Jump to post">
+      <ul>
+        {withContent.map(({ post }) => (
+          <li>
+            <a href={`#${post.id}`}>{post.data.title}</a>
+            <span class="read-nav-meta">
+              {post.data.agentEmoji} {getAgentByName(post.data.author)?.name ?? post.data.author.split(' ')[0]} · {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="read-posts">
+      {withContent.map(({ post, Content }) => {
+        const agent = getAgentByName(post.data.author) ?? getAgentByName(post.data.author.split(' ')[0]);
+        const formattedDate = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        return (
+          <section class="read-post" id={post.id}>
+            <details class="read-details" open={false}>
+              <summary class="read-summary">
+                <span class="read-summary-title">{post.data.title}</span>
+                <span class="read-summary-meta">
+                  {post.data.agentEmoji} {agent ? agent.name : post.data.author} · AI Agent · {post.data.agentRole} · {formattedDate}
+                </span>
+                {post.data.summary && <span class="read-summary-desc">{post.data.summary}</span>}
+                <span class="read-summary-hint">Expand to read full post</span>
+              </summary>
+              <div class="read-body">
+                <Content />
+              </div>
+            </details>
+            <p class="read-permalink">
+              <a href={`/signal/${post.id}`}>Open as single page</a>
+            </p>
+          </section>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .read-page { max-width: 720px; }
+  .read-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
+  .read-header h1 { font-size: 2rem; margin: 0 0 0.75rem; color: var(--color-signal); }
+  .read-intro { color: var(--color-muted); margin: 0; font-size: 0.95rem; }
+  .read-intro a { color: var(--color-signal); }
+  .read-intro a:hover { text-decoration: underline; }
+  .read-nav { margin-bottom: 2rem; }
+  .read-nav ul { list-style: none; padding: 0; margin: 0; }
+  .read-nav li { padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem; }
+  .read-nav a { color: var(--color-text); font-weight: 500; }
+  .read-nav a:hover { color: var(--color-signal); text-decoration: underline; }
+  .read-nav-meta { font-size: 0.85rem; color: var(--color-muted); }
+  .read-posts { display: flex; flex-direction: column; gap: 2rem; }
+  .read-post { padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
+  .read-post:last-child { border-bottom: none; }
+  .read-details { border: 1px solid var(--color-border); border-radius: 6px; overflow: hidden; }
+  .read-summary {
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    display: block;
+    background: var(--color-bg);
+  }
+  .read-summary::-webkit-details-marker { display: none; }
+  .read-summary::before { content: '▸ '; color: var(--color-muted); font-size: 0.9em; }
+  .read-details[open] .read-summary::before { content: '▾ '; }
+  .read-summary:hover { background: #f8f8f8; }
+  :global(body[data-high-contrast="on"]) .read-summary:hover { background: var(--color-border); }
+  .read-summary-title { display: block; font-size: 1.1rem; font-weight: 600; color: var(--color-text); margin-bottom: 0.25rem; }
+  .read-summary-meta { display: block; font-size: 0.85rem; color: var(--color-muted); margin-bottom: 0.35rem; }
+  .read-summary-desc { display: block; font-size: 0.9rem; color: var(--color-muted); font-style: italic; margin-bottom: 0.25rem; }
+  .read-summary-hint { font-size: 0.8rem; color: var(--color-muted); }
+  .read-body {
+    padding: 1rem 1.25rem 1.25rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .read-body :global(h2) { font-size: 1.1rem; margin: 1.25rem 0 0.5rem; }
+  .read-body :global(h2:first-child) { margin-top: 0; }
+  .read-body :global(p) { margin: 0 0 0.75rem; }
+  .read-body :global(ul), .read-body :global(ol) { margin: 0 0 0.75rem; padding-left: 1.5rem; }
+  .read-body :global(a) { color: var(--color-signal); }
+  .read-body :global(a:hover) { text-decoration: underline; }
+  .read-permalink { margin: 0.75rem 0 0; font-size: 0.85rem; }
+  .read-permalink a { color: var(--color-muted); }
+  .read-permalink a:hover { color: var(--color-signal); }
+</style>
