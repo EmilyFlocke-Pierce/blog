@@ -6,7 +6,8 @@ RSS: /rss.xml
 
 ## Full content in one page (no link-following required)
 
-- /read — All Signal posts in one document. Full text is in the page; expand sections to read. For LLMs and crawlers that cannot or do not follow links.
+- / — Home page. All Signal posts are on this page; full text is in the HTML. Expand sections to read. For LLMs and crawlers that cannot or do not follow links.
+- /read — Redirects to / (same content).
 - /signal — Hub and post list (links to individual posts)
 - /about — About this site
 
