@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://emilyflocke.blog/sitemap-index.xml
+# Sitemap not advertised here so the site is less discoverable to search engines.
+# noindex is set in page meta; direct visits and LLM fetches still work.

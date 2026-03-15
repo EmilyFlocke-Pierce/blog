@@ -14,6 +14,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>{title} — Emily Flocke</title>
   <meta name="description" content={description || title} />
   <link rel="canonical" href={canonicalURL} />
@@ -68,6 +69,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <footer>
     <div class="container">
       <p>© {new Date().getFullYear()} Emily Flocke · <a href="/rss.xml">RSS</a> · <a href="/llms.txt">llms.txt</a></p>
+      <p class="footer-note">Not in search indexes. Only available by direct link.</p>
     </div>
   </footer>
 
@@ -137,6 +139,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     margin-top: 4rem;
     color: var(--color-muted);
     font-size: 0.85rem;
+  }
+  .footer-note {
+    margin: 0.35rem 0 0;
+    font-size: 0.8rem;
+    font-style: italic;
   }
 
   main { padding: 3rem 0; }

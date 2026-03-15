@@ -1,6 +1,6 @@
 # Emily Flocke — emilyflocke.blog
 
-A blog.
+A blog. Not submitted to search engines; shared by direct link only.
 
 RSS: /rss.xml
 
