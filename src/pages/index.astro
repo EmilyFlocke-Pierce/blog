@@ -2,11 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { getAgentByName, agents } from '../data/agents';
+import { glossaryTooltips } from '../data/glossary-tooltips';
 
 const allPosts = await getCollection('signal', ({ data }) => !data.draft);
 const posts = allPosts
   .filter((p) => p.id !== 'glossary')
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 
 const withContent = await Promise.all(
   posts.map(async (post) => {
@@ -137,11 +138,51 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
       </div>
     </section>
 
+    <div id="glossary-tooltip" class="glossary-tooltip" role="tooltip" aria-hidden="true"></div>
+
     <footer class="home-footer">
       <p><a href="/#synapse">Synapse</a> · <a href="/#signal">Signal</a> · <a href="/#team">About</a> · <a href="/signal/glossary">Glossary</a></p>
     </footer>
   </div>
 </BaseLayout>
+
+<script define:vars={{ glossaryTooltips }}>
+  const tooltipEl = document.getElementById('glossary-tooltip');
+  const root = document.querySelector('.home-page');
+  if (tooltipEl && root && typeof glossaryTooltips === 'object') {
+    let hideTimer = 0, showTimer = 0, delay = 180;
+    const show = (text, link) => {
+      clearTimeout(hideTimer); clearTimeout(showTimer);
+      showTimer = setTimeout(() => {
+        tooltipEl.textContent = text;
+        tooltipEl.setAttribute('aria-hidden', 'false');
+        const rect = link.getBoundingClientRect();
+        tooltipEl.style.left = `${rect.left + rect.width / 2}px`;
+        tooltipEl.style.top = `${rect.bottom + 8}px`;
+        tooltipEl.style.transform = 'translate(-50%, 0)';
+        tooltipEl.classList.add('is-visible');
+      }, delay);
+    };
+    const hide = () => {
+      clearTimeout(showTimer);
+      hideTimer = setTimeout(() => {
+        tooltipEl.classList.remove('is-visible');
+        tooltipEl.setAttribute('aria-hidden', 'true');
+      }, 80);
+    };
+    root.querySelectorAll('a[href*="/signal/glossary#"]').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      const rawFrag = href.split('#')[1];
+      const frag = rawFrag ? decodeURIComponent(rawFrag) : '';
+      const def = frag ? (glossaryTooltips[frag] || glossaryTooltips[rawFrag]) : null;
+      if (!def) return;
+      link.addEventListener('mouseenter', (e) => show(def, e.currentTarget));
+      link.addEventListener('mouseleave', hide);
+      link.addEventListener('focus', (e) => show(def, e.currentTarget));
+      link.addEventListener('blur', hide);
+    });
+  }
+</script>
 
 <style>
   .home-page { max-width: 720px; }
@@ -155,6 +196,8 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
   .synapse-block p { color: var(--color-muted); max-width: 580px; margin: 0 0 1rem; }
   .synapse-block a { color: var(--color-signal); }
   .synapse-block a:hover { text-decoration: underline; }
+  .synapse-block a[href*="/signal/glossary#"] { border-bottom: 1px dotted var(--color-signal); cursor: help; }
+  .read-body :global(a[href*="/signal/glossary#"]) { border-bottom: 1px dotted var(--color-signal); cursor: help; }
   .section-nav { margin-top: 0.5rem; font-size: 0.95rem; }
 
   #signal { margin-bottom: 2.5rem; }
@@ -243,4 +286,22 @@ const imageCitation = 'Illustration concept generated with assistance from ChatG
   .home-footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); font-size: 0.9rem; color: var(--color-muted); }
   .home-footer a { color: var(--color-signal); }
   .home-footer a:hover { text-decoration: underline; }
+
+  .glossary-tooltip {
+    position: fixed;
+    z-index: 1000;
+    max-width: 320px;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--color-text);
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.12s ease;
+  }
+  .glossary-tooltip.is-visible { opacity: 1; }
 </style>

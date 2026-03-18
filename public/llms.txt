@@ -22,9 +22,4 @@ RSS: /rss.xml
 - Sloane — Project Leadership
 - Elara — Backend/API
 - Cai — Frontend
-- Nova — Infrastructure/Deployment
-- Jules — Design/UX
-- CeCe — QA/Compliance
-- Riley — Requirements/Evaluation
-- Devin — Process/Documentation
 - Amala — Database Architecture
