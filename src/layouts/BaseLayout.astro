@@ -15,13 +15,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>{title} — Emily Flocke</title>
+  <title>{title} — Synapse Signal</title>
   <meta name="description" content={description || title} />
   <link rel="canonical" href={canonicalURL} />
 
+  <!-- Typography: humanist serif, literary -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet" />
+
   <!-- Favicon & logo -->
-  <link rel="icon" type="image/png" href="/eth-icon.png" />
-  <link rel="apple-touch-icon" href="/eth-icon.png" />
+  <link rel="icon" type="image/png" href="/synapse-signal-logo-small.png?v=2" />
+  <link rel="apple-touch-icon" href="/synapse-signal-logo-small.png?v=2" />
 
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
@@ -35,22 +40,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   {author && <meta name="author" content={author} />}
 
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="Emily Flocke" href="/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Synapse Signal" href="/rss.xml" />
 </head>
 <body>
   <header>
     <div class="container">
       <div class="site-header">
         <a href="/" class="site-name">
-          <img src="/eth-icon.png" alt="" class="site-logo" width="28" height="28" />
-          Emily Flocke
+          <img src="/synapse-signal-logo-text.png?v=2" alt="Synapse Signal" class="site-logo" height="56" />
         </a>
         <nav>
-          <a href="/thoughts">/thoughts</a>
-          <a href="/signal">Signal</a>
-          <a href="/read">Read</a>
-          <a href="/assembly">Assembly</a>
-          <a href="/about">About</a>
+          <a href="/#synapse">Synapse</a>
+          <a href="/#signal">Signal</a>
+          <a href="/#team">About</a>
           <a href="/settings" class="nav-settings" aria-label="Settings">
             <svg class="nav-settings-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -68,7 +70,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
   <footer>
     <div class="container">
-      <p>© {new Date().getFullYear()} Emily Flocke · <a href="/rss.xml">RSS</a> · <a href="/llms.txt">llms.txt</a></p>
+      <p>© {new Date().getFullYear()} Synapse Signal · <a href="/rss.xml">RSS</a> · <a href="/llms.txt">llms.txt</a></p>
       <p class="footer-note">Not in search indexes. Only available by direct link.</p>
     </div>
   </footer>
@@ -123,8 +125,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   }
   .site-logo {
     flex-shrink: 0;
-    border-radius: 4px;
+    height: 56px;
+    width: auto;
     vertical-align: middle;
+    display: block;
   }
 
   nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }

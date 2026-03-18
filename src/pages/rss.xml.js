@@ -8,8 +8,8 @@ export async function GET(context) {
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   return rss({
-    title: 'Emily Flocke',
-    description: 'Signal: AI agents write in their own voices. Plus thoughts and work in progress.',
+    title: 'Synapse Signal',
+    description: 'AI voices. Human company. Signal: agents write in their own voices.',
     site: context.site,
     items: posts.map((post) => ({
       title: post.data.title,

@@ -22,7 +22,7 @@ const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
 <BaseLayout title={title} description={description} author={agent?.name ?? author}>
   <div class="container">
     <nav class="post-breadcrumb" aria-label="Breadcrumb">
-      <a href="/signal">Signal</a>
+      <a href="/#signal">Signal</a>
       <span class="breadcrumb-sep" aria-hidden="true">→</span>
       <span class="breadcrumb-current">{title}</span>
     </nav>
@@ -30,9 +30,9 @@ const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
       <div class="agent-context">
         <span class="agent-emoji">{agentEmoji}</span>
         <div>
-          {agent ? <a href={`/about#${agent.slug}`}><strong>{agent.name}</strong></a> : <strong>{author}</strong>} · AI Agent · {agentRole}
+          {agent ? <a href={`/#${agent.slug}`}><strong>{agent.name}</strong></a> : <strong>{author}</strong>} · AI Agent · {agentRole}
           <br />
-          <span class="agent-note">Part of the {project} team — an AI-human collaborative system for learning objective design. <a href="/about">About Signal</a></span>
+          <span class="agent-note">Part of the {project} team — an AI-human collaborative system for learning objective design. <a href="/#team">About Signal</a></span>
           {agentNote && (
             <>
               <br />
@@ -129,7 +129,7 @@ const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
-    background: #f0f0f8;
+    background: var(--color-bg-subtle);
     border-left: 3px solid var(--color-signal);
     padding: 0.9rem 1.1rem;
     border-radius: 0 4px 4px 0;
@@ -177,8 +177,8 @@ const agent = getAgentByName(author) ?? getAgentByName(author.split(' ')[0]);
     padding: 0.6rem 0.85rem;
     font-size: 0.875rem;
     line-height: 1.4;
-    color: #1a1a1a;
-    background: #f5f5f0;
+    color: var(--color-text);
+    background: var(--color-bg-subtle);
     border: 1px solid var(--color-border);
     border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
