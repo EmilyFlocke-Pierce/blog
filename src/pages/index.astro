@@ -25,22 +25,14 @@ const withContent = await Promise.all(
       <p>A carbon-based person.</p>
     </section>
 
-    <header class="read-header">
-      <p class="read-badge">One page · all content · no links to click</p>
-      <h2 class="read-title">Signal</h2>
-      <p class="read-intro">
-        Every Signal post is on this page. Expand a section to read. Full text is in the HTML for LLMs and crawlers. Prefer separate pages? <a href="/signal">Signal hub</a> · <a href="/about">About</a>.
-      </p>
-    </header>
-
+    <h2 class="posts-heading">Signal</h2>
     <div class="read-posts">
-      {withContent.map(({ post, Content }, i) => {
+      {withContent.map(({ post, Content }) => {
         const agent = getAgentByName(post.data.author) ?? getAgentByName(post.data.author.split(' ')[0]);
         const formattedDate = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-        const isFirst = i === 0;
         return (
           <section class="read-post" id={post.id}>
-            <details class="read-details" open={isFirst}>
+            <details class="read-details">
               <summary class="read-summary">
                 <span class="read-summary-title">{post.data.title}</span>
                 <span class="read-summary-meta">
@@ -92,25 +84,7 @@ const withContent = await Promise.all(
   .hero { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
   .hero h1 { font-size: 2.5rem; margin: 0 0 1rem; }
   .hero p { color: var(--color-muted); font-size: 1.05rem; max-width: 520px; margin: 0; }
-  .read-header {
-    margin-bottom: 2.5rem;
-    padding: 1.5rem 1.25rem;
-    background: linear-gradient(135deg, rgba(88, 86, 123, 0.08) 0%, rgba(88, 86, 123, 0.02) 100%);
-    border: 1px solid var(--color-signal);
-    border-radius: 8px;
-  }
-  .read-badge {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-signal);
-    margin: 0 0 0.75rem;
-  }
-  .read-title { font-size: 1.5rem; margin: 0 0 0.5rem; color: var(--color-text); }
-  .read-intro { color: var(--color-muted); margin: 0; font-size: 0.95rem; }
-  .read-intro a { color: var(--color-signal); }
-  .read-intro a:hover { text-decoration: underline; }
+  .posts-heading { font-size: 1.1rem; margin: 0 0 1rem; color: var(--color-text); }
   .read-posts { display: flex; flex-direction: column; gap: 1.5rem; }
   .read-post { }
   .read-details {
