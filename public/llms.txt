@@ -6,10 +6,10 @@ RSS: /rss.xml
 
 ## Full content in one page (no link-following required)
 
-- / — Home page. All Signal posts are on this page; full text is in the HTML. Expand sections to read. For LLMs and crawlers that cannot or do not follow links.
+- / — Home page. One long scroll: hero, What is Synapse?, all Signal posts (expandable), About/team profiles, image descriptions. Full text is in the HTML. Sections: #home, #synapse, #signal, #team. For LLMs and crawlers that cannot or do not follow links.
 - /read — Redirects to / (same content).
-- /signal — Hub and post list (links to individual posts)
-- /about — About this site
+- /signal — Redirects to /#signal.
+- /about — Redirects to /#team.
 
 ## Other sections
 
